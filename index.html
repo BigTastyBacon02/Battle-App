@@ -3,22 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<title>VS Tournament</title>
+<title>Adult Star Battle – Deluxe</title>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#0a0d1c">
+<meta name="theme-color" content="#090814">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <canvas id="game"></canvas>
-<div id="panel"></div>
-<div class="ui" id="ui">
-  <button class="btn" id="btnLeft">⬅️ Links</button>
-  <button class="btn secondary" id="btnUndo">↩︎ Rückgängig</button>
-  <button class="btn" id="btnRight">Rechts ➡️</button>
+
+<div class="ui-panel"></div>
+<div class="controls">
+  <button class="btn">⬅️ Links</button>
+  <button class="btn alt">↩︎ Rückgängig</button>
+  <button class="btn">Rechts ➡️</button>
 </div>
+<div id="help">
+  <div class="help-card">
+    <h2>Tipps</h2>
+    <p><span class="badge">Wischen</span> Links/Rechts = Sieger wählen</p>
+    <p><span class="badge">Musik</span> Im Titel oben einschalten</p>
+    <p><span class="badge">Bilder</span> Im Match oben auf „Setzen“ tippen und eine Bild‑URL einfügen</p>
+    <div class="row"><button onclick="document.getElementById('help').style.display='none'" class="btn">Okay</button></div>
+  </div>
+</div>
+
 <script src="main.js"></script>
 <script>
 if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'));}
 </script>
-</body></html>
+</body>
+</html>
