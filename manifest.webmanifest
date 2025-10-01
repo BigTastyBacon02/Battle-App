@@ -1,0 +1,15 @@
+{
+  "name": "Adult Star Battle – Retro 80s",
+  "short_name": "ASB Retro80s",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#000814",
+  "theme_color": "#00f0ff",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 192 192'><defs><linearGradient id='g' x1='0' x2='1' y1='0' y2='1'><stop stop-color='%2300f0ff'/><stop offset='1' stop-color='%23ff00f0'/></linearGradient></defs><rect width='192' height='192' fill='%2300081a'/><path d='M96 20l18 37 41 6-30 29 7 41-36-19-36 19 7-41-30-29 41-6z' fill='url(%23g)' stroke='%23fff' stroke-width='4' opacity='.95'/></svg>",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512"
+    }
+  ]
+}
