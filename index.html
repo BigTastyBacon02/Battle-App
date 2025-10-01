@@ -3,155 +3,210 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Battle Arcade</title>
+<title>Adult Star Battle</title>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#0b0e1a">
+<meta name="theme-color" content="#0a0814">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Battle Arcade">
+<meta name="apple-mobile-web-app-title" content="AS Battle">
 <link rel="apple-touch-icon" href="icon-180.png">
 <style>
-:root{
-  --bg:#0b0e1a; --card:#111735; --line:#1c2450; --txt:#e8ecff; --mut:#94a7cc;
-  --brand:#57d0ff; --ok:#21d19f; --bad:#ff5470; --chip:#0e1533;
-}
-*{box-sizing:border-box}
-body{margin:0;font-family:-apple-system,system-ui,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(1100px 700px at 50% -120px,#142861 0%,#0b0e1a 55%);color:var(--txt);padding:16px}
-h1{margin:0 0 6px;font-size:24px}
-.grid{display:grid;grid-template-columns:280px 1fr;gap:12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
-.btn{border:0;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer}
-.btn.pri{background:linear-gradient(180deg,#6fe1ff,#2b9dff);color:#00122a}
-.btn.sec{background:#0d152e;color:var(--txt);border:1px solid var(--line)}
-.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-select,textarea,input{width:100%;padding:10px;border-radius:12px;border:1px solid var(--line);background:#0c1225;color:var(--txt)}
-.pill{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;margin:4px 4px 0 0;border-radius:999px;background:#0d152e;border:1px solid var(--line);font-size:13px}
-.list{min-height:80px}
-.hidden{display:none}
-.duel{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:start}
-.slot{display:flex;flex-direction:column;gap:10px}
-.shot{width:100%;max-width:320px;aspect-ratio:1/1;border-radius:16px;border:1px solid var(--line);background:#0c1225;object-fit:cover}
-.name{font-size:18px;font-weight:800;text-align:center}
-.thumbs{display:flex;gap:8px;overflow:auto;padding-bottom:4px}
-.thumbs img{width:72px;height:72px;border-radius:10px;border:1px solid var(--line);background:#0c1225;object-fit:cover;flex:0 0 auto;cursor:pointer}
-.chips{display:flex;gap:6px;flex-wrap:wrap}
-.chip{border:1px solid var(--line);background:var(--chip);color:var(--mut);font-size:12px;padding:6px 10px;border-radius:10px}
-.chip a{color:#9ed2ff;text-decoration:none}
-.choose{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.ok{background:linear-gradient(180deg,#5dffce,#16c48a);color:#001a12}
-.bad{background:linear-gradient(180deg,#ff9ab0,#ff5470);color:#2a0009}
-.video{width:100%;max-width:320px;aspect-ratio:16/9;border-radius:12px;border:1px solid var(--line);background:#000}
-.sub{color:var(--mut);font-size:12px}
-h2{font-size:16px;margin:8px 0 4px}
+  :root{
+    --bg:#0a0814; --bg2:#120c25;
+    --card:#140f2b; --line:#261f45;
+    --txt:#f5eaff; --mut:#b9a7d6;
+    --pink:#ff6ad5; --cyan:#48e0ff; --vio:#7c5cff; --lime:#64ffb0; --red:#ff4d6d;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{margin:0;font-family:-apple-system,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+       background:
+        radial-gradient(1200px 900px at 70% -200px, #1b0f43 0%, transparent 60%),
+        radial-gradient(1000px 700px at -20% -200px, #1a0e3c 0%, transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+       color:var(--txt); overflow:hidden}
+  .app{position:fixed; inset:0; display:grid; grid-template-columns: 310px 1fr; gap:14px; padding:16px}
+  .card{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+        border:1px solid var(--line); border-radius:18px; padding:14px;
+        box-shadow:0 10px 28px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.05); backdrop-filter: blur(6px)}
+  h1{margin:0; font-size:22px; letter-spacing:0.5px}
+  .sub{color:var(--mut); font-size:12px; margin:4px 0 10px}
+  .col{display:flex; flex-direction:column; gap:12px; min-height:0}
+  .row{display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+  select,textarea,input{width:100%; padding:10px; border-radius:12px; border:1px solid var(--line);
+    background:#0e0a1d; color:var(--txt); font-size:16px; outline:none}
+  textarea{flex:1 1 auto; min-height:140px; resize:none}
+  .btn{border:0; border-radius:14px; padding:12px 16px; font-weight:900; cursor:pointer; transition:transform .08s ease}
+  .btn:active{transform:translateY(1px)}
+  .pri{background:linear-gradient(180deg, var(--pink), #b84bd1); color:#23052b}
+  .sec{background:#110c20; color:var(--txt); border:1px solid var(--line)}
+  .list{display:flex; gap:8px; flex-wrap:wrap; align-content:flex-start; overflow:auto}
+  .pill{display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:#110c20; border:1px solid var(--line); font-size:13px}
+  .arena{display:grid; grid-template-columns:1fr auto 1fr; gap:14px; align-items:center; min-height:0}
+  .slot{display:flex; flex-direction:column; gap:12px; align-items:center}
+  .shot{width:min(40vw,420px); height:min(40vw,420px); max-width:420px; max-height:420px; aspect-ratio:1/1;
+        border-radius:18px; border:1px solid var(--line); background:#0f0a21; object-fit:cover; box-shadow:0 4px 12px rgba(0,0,0,.35)}
+  .name{font-size:18px; font-weight:900; text-align:center}
+  .thumbs{display:flex; gap:10px; overflow:auto; max-width:100%; padding:4px}
+  .thumbs img{width:78px; height:78px; border-radius:12px; border:1px solid var(--line); background:#0f0a21; object-fit:cover; flex:0 0 auto; cursor:pointer; transition: transform .08s}
+  .thumbs img:active{transform: scale(.98)}
+  .vs{font-weight:900; font-size:20px; opacity:.9}
+  .choose{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  .ok{background:linear-gradient(180deg, var(--lime), #38c98b); color:#02150c}
+  .bad{background:linear-gradient(180deg, var(--red), #d93b64); color:#2a000a}
+  .footer{display:flex; justify-content:space-between; align-items:center}
+  .meter{height:7px; border-radius:999px; background:#0e0a1d; border:1px solid var(--line); overflow:hidden}
+  .meter span{display:block; height:100%; background:linear-gradient(90deg, var(--cyan), var(--vio)); width:0%}
+  .confetti{pointer-events:none; position:fixed; inset:0; overflow:hidden}
+  .c{position:absolute; width:8px; height:14px; border-radius:2px; opacity:.9}
+  .glow{ text-shadow: 0 0 12px rgba(255,106,213,.45), 0 0 24px rgba(120,90,255,.35) }
+  .list, .thumbs{ -webkit-overflow-scrolling: touch; overscroll-behavior: contain }
+  @media (max-width: 900px){ .app{grid-template-columns:1fr; } .arena{grid-template-columns:1fr auto 1fr} }
 </style>
 </head>
 <body>
-  <h1>🎮 Battle Arcade</h1>
-  <div class="sub">Wähle einen Modus. Alles funktioniert als ZIP/PWA ohne Server. Bilder: Openverse & Wikipedia + eigene URLs/Dateien. Songs: iTunes‑Previews (30s) automatisch, optional YouTube‑Embed per URL.</div>
-
-  <div class="grid">
-    <div class="card">
-      <h2>Modus</h2>
-      <select id="mode">
-        <option value="games">Videospiele‑Battle</option>
-        <option value="songs">Song‑Battle</option>
-        <option value="celeb">Promi‑Battle</option>
-        <option value="adult">Adult‑Star‑Battle</option>
-        <option value="streamer">Streamer‑Battle</option>
-        <option value="custom">Eigene Liste</option>
-      </select>
-
-      <div id="songPane" class="hidden">
-        <h2>Genre (Songs)</h2>
-        <select id="genre">
-          <option>pop</option><option>hip hop</option><option>rock</option><option>electronic</option><option>metal</option><option>jazz</option>
-        </select>
-        <div class="sub">Es werden automatisch 10 zufällige Songs via iTunes‑Search geladen (CORS‑freundlich). Du kannst optional eine YouTube‑URL einfügen, um das Video einzubetten.</div>
-      </div>
-
-      <h2>Duell‑Ziel</h2>
-      <input id="target" type="number" value="1" min="1">
-
-      <h2>Namen (für „Eigene Liste“)</h2>
-      <textarea id="names" rows="8" placeholder="Name 1
-Name 2
-Name 3"></textarea>
-
-      <div class="row" style="margin-top:10px">
-        <button class="btn pri" id="startBtn">Start</button>
-        <button class="btn sec" id="demoBtn">Demo</button>
-      </div>
-
-      <div style="margin-top:10px">
+<div class="app">
+  <div class="card col">
+    <h1 class="glow">💫 Adult Star Battle</h1>
+    <div class="sub">Duell bis zur Ziel‑Anzahl. Bilder kommen aus Wikipedia & Openverse (nicht-NSFW). Eigene Bild‑URLs kannst du jederzeit hinzufügen.</div>
+    <div class="row">
+      <label style="flex:1 1 auto">
+        <div class="sub">Ziel‑Anzahl</div>
+        <input id="target" type="number" value="1" min="1">
+      </label>
+    </div>
+    <div class="sub">Namen (je Zeile)</div>
+    <textarea id="names" placeholder="Mia Malkova
+Johnny Sins
+Abella Danger
+Riley Reid
+Angela White"></textarea>
+    <div class="row">
+      <button class="btn pri" id="startBtn">Start</button>
+      <button class="btn sec" id="demoBtn">Demo</button>
+      <button class="btn sec" id="muteBtn">🔊 Musik</button>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; min-height:140px">
+      <div>
         <div class="sub">Drin</div>
         <div id="listIn" class="list"></div>
-        <div class="sub" style="margin-top:10px">Raus</div>
+      </div>
+      <div>
+        <div class="sub">Raus</div>
         <div id="listOut" class="list"></div>
       </div>
     </div>
+    <div class="sub">Hinweis: Diese App zeigt keine expliziten Inhalte. Für genaue Bilder kannst du eine Bild‑URL hinzufügen.</div>
+  </div>
 
-    <div class="card">
-      <div id="arena" class="hidden">
-        <div class="duel">
-          <div class="slot">
-            <img id="li" class="shot" src="assets/placeholder.png" alt="links">
-            <div id="lname" class="name">–</div>
-            <div id="laudioWrap" class="hidden"><audio id="laudio" controls></audio></div>
-            <iframe id="lyt" class="video hidden" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <div class="chips" id="lchips"></div>
-            <div class="thumbs" id="lgal"></div>
-          </div>
-          <div style="align-self:center;font-weight:900;opacity:.9">VS</div>
-          <div class="slot">
-            <img id="ri" class="shot" src="assets/placeholder.png" alt="rechts">
-            <div id="rname" class="name">–</div>
-            <div id="raudioWrap" class="hidden"><audio id="raudio" controls></audio></div>
-            <iframe id="ryt" class="video hidden" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <div class="chips" id="rchips"></div>
-            <div class="thumbs" id="rgal"></div>
+  <div class="card col" style="min-height:0">
+    <div id="arena" class="col" style="display:none">
+      <div class="arena">
+        <div class="slot" id="leftSlot">
+          <img id="li" class="shot" src="assets/placeholder.png" alt="links">
+          <div id="lname" class="name">–</div>
+          <div class="thumbs" id="lgal"></div>
+          <div class="row" style="gap:6px">
+            <input id="lurl" placeholder="https:// Bild‑URL" style="flex:1 1 160px">
+            <button class="btn sec" id="lset">Setzen</button>
           </div>
         </div>
-
-        <div class="choose" style="margin-top:10px">
-          <button class="btn ok" id="chooseLeft">⬅️ Links gewinnt</button>
-          <button class="btn bad" id="chooseRight">Rechts gewinnt ➡️</button>
-        </div>
-
-        <div class="row" style="margin-top:10px;justify-content:space-between">
-          <div class="row">
-            <button class="btn sec" id="undoBtn" disabled>Rückgängig</button>
-            <button class="btn sec" id="shuffleBtn">Neu mischen</button>
+        <div class="vs">VS</div>
+        <div class="slot" id="rightSlot">
+          <img id="ri" class="shot" src="assets/placeholder.png" alt="rechts">
+          <div id="rname" class="name">–</div>
+          <div class="thumbs" id="rgal"></div>
+          <div class="row" style="gap:6px">
+            <input id="rurl" placeholder="https:// Bild‑URL" style="flex:1 1 160px">
+            <button class="btn sec" id="rset">Setzen</button>
           </div>
-          <div class="sub" id="status"></div>
         </div>
       </div>
 
-      <div id="result" class="hidden">
-        <h2>🏆 Übrig</h2>
-        <div id="survivors"></div>
+      <div class="choose">
+        <button class="btn ok" id="chooseLeft">⬅️ Links gewinnt</button>
+        <button class="btn bad" id="chooseRight">Rechts gewinnt ➡️</button>
+      </div>
+
+      <div class="footer">
+        <div class="row">
+          <button class="btn sec" id="undoBtn" disabled>Rückgängig</button>
+          <button class="btn sec" id="shuffleBtn">Neu mischen</button>
+        </div>
+        <div class="meter"><span id="meter"></span></div>
       </div>
     </div>
+
+    <div id="result" style="display:none">
+      <h2 class="glow">🏆 Übrig</h2>
+      <div id="survivors" class="list"></div>
+    </div>
   </div>
+</div>
+
+<canvas class="confetti" id="confetti"></canvas>
 
 <script>
 const $=s=>document.querySelector(s);
-const modeEl=$('#mode'), genreEl=$('#genre'), songPane=$('#songPane');
-const namesEl=$('#names'), targetEl=$('#target'), startBtn=$('#startBtn'), demoBtn=$('#demoBtn');
+const namesEl=$('#names'), targetEl=$('#target'), startBtn=$('#startBtn'), demoBtn=$('#demoBtn'), muteBtn=$('#muteBtn');
 const arena=$('#arena'), result=$('#result'), survivors=$('#survivors');
-const li=$('#li'), ri=$('#ri'), lname=$('#lname'), rname=$('#rname');
-const lgal=$('#lgal'), rgal=$('#rgal'), lchips=$('#lchips'), rchips=$('#rchips');
-const chooseLeft=$('#chooseLeft'), chooseRight=$('#chooseRight'), undoBtn=$('#undoBtn'), shuffleBtn=$('#shuffleBtn'), status=$('#status');
-const laudioWrap=$('#laudioWrap'), raudioWrap=$('#raudioWrap'), laudio=$('#laudio'), raudio=$('#raudio');
-const lyt=$('#lyt'), ryt=$('#ryt');
-const listIn=$('#listIn'), listOut=$('#listOut');
-
+const li=$('#li'), ri=$('#ri'), lname=$('#lname'), rname=$('#rname'), lgal=$('#lgal'), rgal=$('#rgal');
+const lurl=$('#lurl'), rurl=$('#rurl'), lset=$('#lset'), rset=$('#rset');
+const chooseLeft=$('#chooseLeft'), chooseRight=$('#chooseRight'), undoBtn=$('#undoBtn'), shuffleBtn=$('#shuffleBtn');
+const listIn=$('#listIn'), listOut=$('#listOut'), meter=$('#meter');
 let pool=[], out=[], currentPair=[], history=[], target=1;
-const OPENVERSE=(q,n=12)=>`https://api.openverse.engineering/v1/images/?q=${encodeURIComponent(q)}&page_size=${n}&mature=true`;
-const WIKI=(q,size=380)=>`https://de.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=pageimages&piprop=thumbnail&pithumbsize=${size}&generator=search&gsrlimit=1&gsrsearch=${encodeURIComponent(q)}`;
-modeEl.onchange=()=> songPane.classList.toggle('hidden', modeEl.value!=='songs');
 
 function uniq(a){return Array.from(new Set(a));}
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+// Music via WebAudio
+let audioCtx=null, musicOn=false;
+function startMusic(){
+  if(musicOn) return;
+  const ctx = audioCtx || new (window.AudioContext||window.webkitAudioContext)();
+  audioCtx = ctx;
+  const bpm=92, beat=60/bpm;
+  const seq=[0,3,7,10,12,10,7,3];
+  const now=ctx.currentTime+0.05;
+  for(let bar=0; bar<16; bar++){
+    for(let i=0;i<seq.length;i++){
+      const t=now + (bar*seq.length+i)*beat*0.5;
+      const o=ctx.createOscillator(); const g=ctx.createGain();
+      o.type='triangle'; o.frequency.value=196*Math.pow(2, seq[i]/12);
+      g.gain.setValueAtTime(0.0001,t); g.gain.linearRampToValueAtTime(0.05,t+0.02); g.gain.exponentialRampToValueAtTime(0.0001,t+beat*0.45);
+      o.connect(g).connect(ctx.destination); o.start(t); o.stop(t+beat*0.5);
+    }
+  }
+  musicOn=true;
+}
+muteBtn.onclick=()=>{ if(!musicOn) startMusic(); else { audioCtx && audioCtx.suspend(); musicOn=false; } };
+
+// Confetti
+const conf=$('#confetti'), cctx=conf.getContext('2d');
+let C=[], confOn=false;
+function resize(){ conf.width=innerWidth; conf.height=innerHeight; }
+addEventListener('resize', resize); resize();
+function spawnConfetti(n=120){
+  C=[]; for(let i=0;i<n;i++){
+    C.push({x:Math.random()*conf.width, y: -20-Math.random()*200, vy:2+Math.random()*3, vx: -2+Math.random()*4, r:Math.random()*2*Math.PI, vr: -0.1+Math.random()*0.2, col: ['#ff6ad5','#48e0ff','#7c5cff','#64ffb0','#ff4d6d'][Math.floor(Math.random()*5)]});
+  }
+  if(!confOn){ confOn=true; requestAnimationFrame(step); }
+}
+function step(){
+  cctx.clearRect(0,0,conf.width,conf.height);
+  C.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy; p.r+=p.vr;
+    if(p.y>conf.height+20) p.y=-20;
+    cctx.save(); cctx.translate(p.x,p.y); cctx.rotate(p.r);
+    cctx.fillStyle=p.col; cctx.fillRect(-3,-6,6,12);
+    cctx.restore();
+  });
+  if(confOn) requestAnimationFrame(step);
+}
+
+// Safe image sources
+const OPENVERSE=(q,n=12)=>`https://api.openverse.engineering/v1/images/?q=${encodeURIComponent(q)}&page_size=${n}&mature=true`;
+const WIKI=(q,size=420)=>`https://de.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=pageimages&piprop=thumbnail&pithumbsize=${size}&generator=search&gsrlimit=1&gsrsearch=${encodeURIComponent(q)}`;
 
 async function wikiThumb(q){
   try{const r=await fetch(WIKI(q));const j=await r.json();if(j&&j.query&&j.query.pages){const v=Object.values(j.query.pages)[0];if(v&&v.thumbnail) return v.thumbnail.source;}}catch(e){}
@@ -161,136 +216,89 @@ async function openverseThumbs(q,n=12){
   try{const r=await fetch(OPENVERSE(q,n)); if(!r.ok) return []; const j=await r.json(); return (j.results||[]).map(it=>({src:it.thumbnail||it.url, page:it.foreign_landing_url||it.url}));}catch(e){return [];}
 }
 
-function searchChips(name, el, type){
-  el.innerHTML='';
-  const engines=[
-    {k:'Google',u:'https://www.google.com/search?tbm=isch&safe=off&q='+encodeURIComponent(name)},
-    {k:'Bing',u:'https://www.bing.com/images/search?q='+encodeURIComponent(name)+'&safeSearch=Off'},
-    {k:'Yandex',u:'https://yandex.com/images/search?text='+encodeURIComponent(name)},
-    {k:'DuckDuckGo',u:'https://duckduckgo.com/?ia=images&iax=images&kp=-2&q='+encodeURIComponent(name)}
-  ];
-  if(type==='song'){
-    engines.unshift({k:'YouTube',u:'https://www.youtube.com/results?search_query='+encodeURIComponent(name)});
-  }
-  engines.forEach(e=>{ const c=document.createElement('span'); c.className='chip'; c.innerHTML='<a target="_blank" href="'+e.u+'">🔎 '+e.k+'</a>'; el.appendChild(c); });
+function host(u){try{return new URL(u).host;}catch(e){return ''; }}
+
+async function renderSide(name, bigEl, galEl){
+  bigEl.src='assets/placeholder.png'; galEl.innerHTML='';
+  const w = await wikiThumb(name); if(w) bigEl.src = w;
+  const ov = await openverseThumbs(name, 18);
+  ov.forEach(it=>{ const im=document.createElement('img'); im.src=it.src; im.title = host(it.page||it.src); im.onclick=()=>{ bigEl.src=it.src; }; galEl.appendChild(im); });
 }
 
-async function renderSide(name, bigEl, galEl, chipsEl, type, audioEl, ytEl){
-  bigEl.src='assets/placeholder.png'; galEl.innerHTML=''; chipsEl.innerHTML='';
-  searchChips(name, chipsEl, type);
+function renderLists(){
+  listIn.innerHTML=''; listOut.innerHTML='';
+  pool.forEach(n=>{ const d=document.createElement('div'); d.className='pill'; d.textContent=n; listIn.appendChild(d); });
+  out.forEach(n=>{ const d=document.createElement('div'); d.className='pill'; d.textContent=n; listOut.appendChild(d); });
+  const done = 1 - (pool.length - target) / (namesCount - target);
+  meter.style.width = Math.max(5, Math.round(done*100)) + '%';
+}
 
-  if(type==='song'){
-    ytEl.classList.add('hidden'); ytEl.src='';
-  }
-
-  if(type!=='song'){
-    const w = await wikiThumb(name);
-    if(w) bigEl.src = w;
-    const ov = await openverseThumbs(name, 18);
-    ov.forEach(it=>{ const im=document.createElement('img'); im.src=it.src; im.onclick=()=>{ bigEl.src=it.src; }; galEl.appendChild(im); });
-  }
+let pool=[], out=[], currentPair=[], history=[], target=1, namesCount=0;
+function start(){
+  const names = namesEl.value.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+  pool = uniq(names); namesCount=pool.length;
+  target = Math.max(1, parseInt(targetEl.value||'1',10));
+  out=[]; history=[];
+  if(pool.length<2 || target>=pool.length){ alert('Mind. 2 Namen & Ziel kleiner als Anzahl.'); return; }
+  arena.style.display='flex'; result.style.display='none';
+  renderLists(); drawPair(); undoBtn.disabled=true;
+  startMusic();
 }
 
 function drawPair(){
   if(pool.length<=1) return;
   const a=Math.floor(Math.random()*pool.length); let b=Math.floor(Math.random()*pool.length); while(b===a) b=Math.floor(Math.random()*pool.length);
   currentPair=[pool[a], pool[b]];
-  lname.textContent=currentPair[0].title || currentPair[0]; rname.textContent=currentPair[1].title || currentPair[1];
-
-  if(modeEl.value==='songs'){
-    const L=currentPair[0], R=currentPair[1];
-    laudio.src=L.previewUrl || ''; raudio.src=R.previewUrl || '';
-    laudioWrap.classList.toggle('hidden', !L.previewUrl); raudioWrap.classList.toggle('hidden', !R.previewUrl);
-    renderSide(`${L.artist} ${L.title}`, li, lgal, lchips, 'song', laudio, lyt);
-    renderSide(`${R.artist} ${R.title}`, ri, rgal, rchips, 'song', raudio, ryt);
-    // YouTube prompt chips
-    const addChip = (chipsEl, obj, ytEl)=>{
-      const s=document.createElement('span'); s.className='chip'; s.textContent='YouTube-URL einfügen →';
-      s.onclick=()=>{const u=prompt('YouTube-URL für '+(obj.title||obj)); if(u){ const id=(u.match(/[?&]v=([^&]+)/)||u.match(/youtu\.be\/([^?]+)/)||[])[1]; if(id){ ytEl.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1'; ytEl.classList.remove('hidden'); }}};
-      chipsEl.appendChild(s);
-    };
-    addChip(lchips, L, lyt); addChip(rchips, R, ryt);
-  } else {
-    renderSide(currentPair[0], li, lgal, lchips, 'img');
-    renderSide(currentPair[1], ri, rgal, rchips, 'img');
-  }
-  status.textContent = pool.length + ' aktiv | Ziel: ' + target;
-}
-
-async function start(){
-  target=Math.max(1, parseInt(targetEl.value||'1',10));
-  out=[]; history=[];
-  const m=modeEl.value;
-  if(m==='custom'){
-    pool = uniq(namesEl.value.split(/\\r?\\n/).map(s=>s.trim()).filter(Boolean));
-  } else if(m==='games'){
-    const built = [
-      'Super Mario Bros.','The Legend of Zelda','Metroid','Halo 3','God of War','The Witcher 3','Elden Ring','Minecraft','Fortnite','Street Fighter II','Tekken 7','Gran Turismo 7','Forza Horizon 5','Tetris','Portal 2','Half-Life 2','Doom','Super Mario 64','Bloodborne','Red Dead Redemption 2'
-    ];
-    pool = shuffle(built).slice(0, 12);
-  } else if(m==='celeb'){
-    const built=['Tom Cruise','Natalie Portman','Margot Robbie','Zendaya','Keanu Reeves','Rihanna','Ariana Grande','Angelina Jolie','Brad Pitt','Ryan Gosling','Emma Stone','Dwayne Johnson','Scarlett Johansson'];
-    pool = shuffle(built).slice(0, 12);
-  } else if(m==='adult'){
-    const built=['Mia Malkova','Johnny Sins','Abella Danger','Riley Reid','Lana Rhoades','Adriana Chechik','Angela White','Violet Myers','Eva Elfie','Lexi Belle','Nikki Benz','Kendra Lust'];
-    pool = shuffle(built).slice(0, 12);
-  } else if(m==='streamer'){
-    const built=['xQc','pokimane','Ibai','Asmongold','Ninja','hasanabi','Kai Cenat','Ludwig Ahgren','Valkyrae','sodapoppin','Summit1g','Shroud'];
-    pool = shuffle(built).slice(0, 12);
-  } else if(m==='songs'){
-    const g = genreEl.value || 'pop';
-    let res=[];
-    try{
-      const r=await fetch(`https://itunes.apple.com/search?term=${encodeURIComponent(g)}&media=music&entity=song&limit=50`);
-      const j=await r.json();
-      res = j.results.map(x=>({title:x.trackName, artist:x.artistName, previewUrl:x.previewUrl}));
-    }catch(_){}
-    shuffle(res);
-    pool = res.slice(0,10);
-  }
-  if(pool.length<2 || target>=pool.length){ alert('Mind. 2 Einträge & Ziel kleiner als Anzahl.'); return; }
-
-  listIn.innerHTML=''; listOut.innerHTML='';
-  pool.forEach(n=>{ const d=document.createElement('div'); d.className='pill'; d.textContent=(n.title?n.artist+' – '+n.title:n); listIn.appendChild(d); });
-
-  arena.classList.remove('hidden'); result.classList.add('hidden');
-  drawPair(); undoBtn.disabled=true;
+  lname.textContent=currentPair[0]; rname.textContent=currentPair[1];
+  renderSide(currentPair[0], li, lgal); renderSide(currentPair[1], ri, rgal);
 }
 
 function pick(idx){
-  if(currentPair.length<2) return;
   const w=currentPair[idx], l=currentPair[1-idx];
-  pool = pool.filter(n=>n!==w && n!==l); pool.push(w); out.push(l);
-  history.push({w,l}); undoBtn.disabled=false;
-  listIn.innerHTML=''; listOut.innerHTML='';
-  pool.forEach(n=>{ const d=document.createElement('div'); d.className='pill'; d.textContent=(n.title?n.artist+' – '+n.title:n); listIn.appendChild(d); });
-  out.forEach(n=>{ const d=document.createElement('div'); d.className='pill'; d.textContent=(n.title?n.artist+' – '+n.title:n); listOut.appendChild(d); });
-  if(pool.length<=target){
-    arena.classList.add('hidden'); result.classList.remove('hidden'); survivors.innerHTML='';
-    pool.forEach(n=>{ const d=document.createElement('div'); d.className='pill'; d.textContent=(n.title?n.artist+' – '+n.title:n); survivors.appendChild(d); });
-    return;
-  }
+  pool = pool.filter(n=>n!==w && n!==l); pool.push(w); out.push(l); history.push({w,l}); undoBtn.disabled=false;
+  renderLists();
+  (idx?ri:li).animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:280,easing:'ease-out'});
+  spawnConfetti(120);
+  if(pool.length<=target){ showResult(); return; }
   drawPair();
 }
 function undo(){
   const h=history.pop(); if(!h) return;
-  pool = pool.filter(n=>n!==h.w); const j=out.lastIndexOf(h.l); if(j>-1) out.splice(j,1);
-  pool.push(h.w,h.l); undoBtn.disabled = history.length===0;
-  listIn.innerHTML=''; listOut.innerHTML='';
-  pool.forEach(n=>{ const d=document.createElement('div'); d.className='pill'; d.textContent=(n.title?n.artist+' – '+n.title:n); listIn.appendChild(d); });
-  out.forEach(n=>{ const d=document.createElement('div'); d.className='pill'; d.textContent=(n.title?n.artist+' – '+n.title:n); listOut.appendChild(d); });
-  drawPair();
+  pool = pool.filter(n=>n!==h.w); const j = out.lastIndexOf(h.l); if(j>-1) out.splice(j,1);
+  pool.push(h.w,h.l); undoBtn.disabled = history.length===0; renderLists(); drawPair();
+}
+function showResult(){
+  arena.style.display='none'; result.style.display='block'; survivors.innerHTML='';
+  pool.forEach(n=>{ const d=document.createElement('div'); d.className='pill'; d.textContent=n; survivors.appendChild(d); });
+  spawnConfetti(200);
 }
 
-startBtn.onclick=start;
-demoBtn.onclick=()=>{ modeEl.value='games'; songPane.classList.add('hidden'); namesEl.value=''; };
-chooseLeft.onclick=()=>pick(0);
-chooseRight.onclick=()=>pick(1);
-undoBtn.onclick=undo;
-shuffleBtn.onclick=drawPair;
+startBtn.onclick = start;
+demoBtn.onclick = ()=>{
+  namesEl.value = ['Mia Malkova','Johnny Sins','Abella Danger','Riley Reid','Lana Rhoades','Adriana Chechik','Angela White','Violet Myers','Eva Elfie','Lexi Belle','Nikki Benz','Kendra Lust'].join('\n');
+};
+chooseLeft.onclick = ()=> pick(0);
+chooseRight.onclick = ()=> pick(1);
+undoBtn.onclick = undo;
+shuffleBtn.onclick = drawPair;
 
-// PWA
-if('serviceWorker' in navigator){ window.addEventListener('load', ()=> navigator.serviceWorker.register('./sw.js').catch(()=>{}) ); }
+// Swipe
+function addSwipe(el, side){
+  let sx=0, sy=0;
+  el.addEventListener('touchstart', e=>{const t=e.touches[0]; sx=t.clientX; sy=t.clientY;}, {passive:true});
+  el.addEventListener('touchend', e=>{
+    const t=e.changedTouches[0]; const dx=t.clientX-sx, dy=t.clientY-sy;
+    if(Math.abs(dx)>40 && Math.abs(dy)<60){ side==='L'?pick(0):pick(1); }
+  });
+}
+addSwipe(document.getElementById('leftSlot'),'L'); addSwipe(document.getElementById('rightSlot'),'R');
+
+// Custom URL
+document.getElementById('lset').onclick=()=>{ const v=lurl.value.trim(); if(/^https?:\/\//i.test(v)){ li.src=v; lurl.value=''; } else alert('Gültige http(s)-Bild‑URL einfügen.'); };
+document.getElementById('rset').onclick=()=>{ const v=rurl.value.trim(); if/^https?:\/\//i.test(v)){ ri.src=v; rurl.value=''; } else alert('Gültige http(s)-Bild‑URL einfügen.'); };
+
+// Prevent page scroll
+document.addEventListener('touchmove', e=>{ if(!e.target.closest('.thumbs,.list,textarea')) e.preventDefault(); }, {passive:false});
 </script>
 </body>
 </html>
