@@ -1,0 +1,13 @@
+html,body{margin:0;height:100%;background:#0a0d1c;overscroll-behavior:none}
+#game{position:fixed;inset:0;touch-action:none}
+.ui{position:fixed;inset:0;display:flex;align-items:flex-end;justify-content:center;pointer-events:none}
+.btn{pointer-events:auto;user-select:none; -webkit-user-select:none;
+  background:linear-gradient(180deg,#7cf2ff,#2da6ff); color:#001423;
+  border:none;border-radius:20px; padding:14px 18px; font:bold 18px system-ui, -apple-system, Segoe UI, Roboto;
+  margin:10px; box-shadow:0 6px 18px rgba(0,0,0,.35);}
+.btn.secondary{background:#0e1633;color:#d8e7ff;border:1px solid #23335a}
+#panel{position:fixed;left:50%;top:12px;transform:translateX(-50%);display:flex;gap:8px;pointer-events:none}
+#panel > *{pointer-events:auto}
+.inputwrap{display:flex;gap:6px;align-items:center;background:#0e1633;border:1px solid #23335a;border-radius:12px;padding:6px 8px}
+.inputwrap input{background:transparent;border:0;outline:none;color:#cfe6ff;font:16px system-ui;width:46vw}
+small{font:12px system-ui;color:#8fa7d6}

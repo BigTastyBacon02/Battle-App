@@ -1,9 +1,9 @@
 {
-  "name": "Adult Star Battle",
-  "short_name": "AS Battle",
+  "name": "VS Tournament",
+  "short_name": "VS",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#0a0814",
-  "theme_color": "#0a0814",
+  "background_color": "#0a0d1c",
+  "theme_color": "#0a0d1c",
   "icons": [{ "src": "icon-180.png", "sizes": "180x180", "type": "image/png" }]
 }
