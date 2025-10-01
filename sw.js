@@ -1,43 +1,5 @@
-const CACHE = 'asb-retro80s-v1';
-const APP_SHELL = [
-  './',
-  './index.html',
-  './manifest.webmanifest'
-];
-
-self.addEventListener('install', (e)=>{
-  self.skipWaiting();
-  e.waitUntil(
-    caches.open(CACHE).then(c=>c.addAll(APP_SHELL))
-  );
-});
-
-self.addEventListener('activate', (e)=>{
-  e.waitUntil((async ()=>{
-    const keys = await caches.keys();
-    await Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)));
-    self.clients.claim();
-  })());
-});
-
-self.addEventListener('fetch', (e)=>{
-  const req = e.request;
-  e.respondWith((async ()=>{
-    const cached = await caches.match(req);
-    if(cached) return cached;
-    try{
-      const res = await fetch(req);
-      if(req.method==='GET' && (res.ok || res.type==='opaqueredirect' || res.type==='opaque')){
-        const c = await caches.open(CACHE);
-        c.put(req, res.clone());
-      }
-      return res;
-    }catch(err){
-      if(req.destination==='image'){
-        const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420'><rect width='100%' height='100%' fill='#041222'/><text x='50%' y='54%' font-family='Arial' font-size='48' fill='#9cf' text-anchor='middle'>Offline</text></svg>`;
-        return new Response(svg, {headers:{'Content-Type':'image/svg+xml'}});
-      }
-      return new Response('Offline', {status:503});
-    }
-  })());
-});
+const CACHE = 'asb-retro80s-v2';
+const APP_SHELL = ['./','./index.html','./manifest.webmanifest'];
+self.addEventListener('install', e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(APP_SHELL)))});
+self.addEventListener('activate', e=>{e.waitUntil((async()=>{const keys=await caches.keys();await Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)));self.clients.claim()})())});
+self.addEventListener('fetch', e=>{const req=e.request;e.respondWith((async()=>{const cached=await caches.match(req);if(cached)return cached;try{const res=await fetch(req);if(req.method==='GET'&&(res.ok||res.type==='opaqueredirect'||res.type==='opaque')){const c=await caches.open(CACHE);c.put(req,res.clone())}return res}catch(err){if(req.destination==='image'){const svg=`<svg xmlns='http://www.w3.org/2000/svg' width='420' height='420'><rect width='100%' height='100%' fill='#041222'/><text x='50%' y='54%' font-family='Arial' font-size='48' fill='#9cf' text-anchor='middle'>Offline</text></svg>`;return new Response(svg,{headers:{'Content-Type':'image/svg+xml'}})}return new Response('Offline',{status:503})}})())});
