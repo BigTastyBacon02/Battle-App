@@ -1,4 +1,4 @@
-const CACHE = 'necro-v2';
+const CACHE = 'necro-v3';
 const ASSETS = ['.', 'index.html','styles.css','app.js','manifest.webmanifest'];
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS)));
