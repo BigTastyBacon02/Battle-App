@@ -3,14 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<title>Adult Star Battle – Deluxe</title>
+<title>Adult Star Battle – Retro 80s</title>
 <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#090814">
+<meta name="theme-color" content="#0b0820">
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<img id="logo" class="logo" src="assets/logo.png" alt="logo">
 <canvas id="game"></canvas>
+<div class="scan"></div>
 
 <div class="ui-panel"></div>
 <div class="controls">
@@ -18,15 +20,7 @@
   <button class="btn alt">↩︎ Rückgängig</button>
   <button class="btn">Rechts ➡️</button>
 </div>
-<div id="help">
-  <div class="help-card">
-    <h2>Tipps</h2>
-    <p><span class="badge">Wischen</span> Links/Rechts = Sieger wählen</p>
-    <p><span class="badge">Musik</span> Im Titel oben einschalten</p>
-    <p><span class="badge">Bilder</span> Im Match oben auf „Setzen“ tippen und eine Bild‑URL einfügen</p>
-    <div class="row"><button onclick="document.getElementById('help').style.display='none'" class="btn">Okay</button></div>
-  </div>
-</div>
+<div id="help" style="display:none"></div>
 
 <script src="main.js"></script>
 <script>

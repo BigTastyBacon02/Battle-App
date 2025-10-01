@@ -1,9 +1,9 @@
 {
-  "name": "Adult Star Battle – Deluxe",
-  "short_name": "AS Deluxe",
+  "name": "Adult Star Battle – Retro 80s",
+  "short_name": "AS Retro",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#090814",
-  "theme_color": "#090814",
+  "background_color": "#0b0820",
+  "theme_color": "#0b0820",
   "icons": [{ "src": "icon-180.png", "sizes": "180x180", "type": "image/png" }]
 }
