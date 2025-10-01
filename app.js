@@ -1,0 +1,1 @@
+/* Voller JS Code aus meiner Antwort */

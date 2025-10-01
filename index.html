@@ -1,222 +1,49 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
-  <meta name="theme-color" content="#0af" />
-  <title>Adult Star Battle – Retro 80s</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <title>Necro Slayer</title>
+  <meta name="theme-color" content="#0b0b0b"/>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" href="data:image/svg+xml;utf8,<?xml version='1.0' encoding='UTF-8'?><svg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 192 192'><defs><linearGradient id='g' x1='0' x2='1' y1='0' y2='1'><stop stop-color='%230ff'/><stop offset='1' stop-color='%23f0f'/></linearGradient></defs><rect width='192' height='192' fill='%2300081a'/><path d='M96 20l18 37 41 6-30 29 7 41-36-19-36 19 7-41-30-29 41-6z' fill='url(%23g)' stroke='%23fff' stroke-width='4' opacity='.95'/></svg>">
-  <style>
-    :root{--bg:#000814;--neon1:#00f0ff;--neon2:#ff00f0;--neon3:#ffe600;--text:#e6f7ff;--muted:#9cd;--shadow:0 10px 30px rgba(0,0,0,.45),0 0 16px rgba(0,255,255,.15);--radius:18px}
-    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-    html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font:16px/1.25 system-ui,Segoe UI,Roboto,Helvetica,Arial}
-    body{overflow:hidden}
-    #stage{position:fixed;inset:0;display:grid;grid-template-rows:auto 1fr auto;background:radial-gradient(circle at 50% -30%, rgba(0,255,255,.12), transparent 60%),radial-gradient(circle at 120% 10%, rgba(255,0,240,.10), transparent 40%),linear-gradient(#000814, #00112a 50%, #000814);background-attachment:fixed;isolation:isolate}
-    #grid{position:absolute;inset:0;pointer-events:none;z-index:0;background:repeating-linear-gradient(0deg, transparent 0 28px, #0ff2 28px 29px),repeating-linear-gradient(90deg, transparent 0 38px, #0ff2 38px 39px);transform:perspective(800px) rotateX(60deg) translateY(30vmin) scale(1.4);filter:drop-shadow(0 0 6px #0ff);opacity:.35}
-    #scan{position:absolute;inset:0;mix-blend-mode:screen;pointer-events:none;opacity:.18;background:repeating-linear-gradient(0deg, rgba(255,255,255,.03) 0 1px, transparent 1px 3px)}
-    header,footer{position:relative;z-index:3;padding:10px env(safe-area-inset-right) 10px env(safe-area-inset-left)}
-    header{display:flex;align-items:center;justify-content:space-between;gap:10px}
-    .title{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.5px;text-shadow:0 0 12px var(--neon1),0 0 28px var(--neon2)}
-    .badge{font-size:12px;color:#021726;background:linear-gradient(135deg,var(--neon1),var(--neon2));padding:4px 8px;border-radius:999px;box-shadow:0 0 20px #0ff6}
-    .iconbtn{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:14px;border:0;background:linear-gradient(180deg,#05213f,#03162a);color:var(--text);font-weight:800;box-shadow:var(--shadow);transform:translateZ(0)}
-    .iconbtn:active{transform:scale(.98)}
-    .iconbtn:hover{filter:brightness(1.05)}
-    .pill{background:linear-gradient(135deg,#091e3b,#0b0724);border:1px solid #2c3a6a;color:#bfe;padding:8px 12px;border-radius:12px}
-    #arena{position:relative;z-index:2;display:grid;place-items:center;padding:8px 16px}
-    .vs{display:grid;grid-template-columns:1fr 40px 1fr;align-items:center;gap:10px;width:100%;max-width:920px}
-    .card{position:relative;display:flex;flex-direction:column;gap:10px;align-items:center;padding:14px;border-radius:var(--radius);background:linear-gradient(180deg,rgba(8,27,53,.88),rgba(4,18,40,.88));border:1px solid #2b5bff55;box-shadow:0 0 0 1px #0ff4 inset,0 12px 40px rgba(0,0,0,.55),0 0 28px #0ff2 inset;min-height:56vmin;touch-action:none;overflow:hidden}
-    .imgwrap{position:relative;width:100%;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:#021425;border:1px solid #1e315a;box-shadow:inset 0 0 40px #0008,0 8px 26px #000a}
-    .imgwrap img{width:100%;height:100%;object-fit:cover;transform:scale(1);transition:transform .35s ease}
-    .imgwrap:hover img{transform:scale(1.03)}
-    .imgpager{position:absolute;right:8px;bottom:8px;display:flex;gap:6px;background:#0009;padding:6px 8px;border-radius:12px;border:1px solid #2b5bff55}
-    .imgpager button{background:transparent;border:0;color:#fff;font-size:16px}
-    .name{font-size:clamp(18px,3.2vw,26px);font-weight:900;text-align:center;letter-spacing:.5px}
-    .hint{font-size:12px;color:var(--muted)}
-    .cta{display:flex;gap:10px;width:100%}
-    .cta button{flex:1}
-    .vs .bolt{font-size:22px;text-align:center;color:#fdf;text-shadow:0 0 10px var(--neon2)}
-    .win{outline:3px solid var(--neon3);box-shadow:0 0 18px #ffe60088,inset 0 0 18px #ffe60055}
-    footer{display:flex;gap:8px;align-items:center;justify-content:center;flex-wrap:wrap}
-    footer .iconbtn{min-width:44px}
-    .panel{position:fixed;z-index:5;inset:auto 0 0 0;background:linear-gradient(180deg,#06162b,#040a16);border-top:1px solid #264;box-shadow:0 -20px 60px #000c;border-top-left-radius:18px;border-top-right-radius:18px;max-height:80%;transform:translateY(100%);transition:transform .35s cubic-bezier(.22,.61,.36,1);padding:12px;display:flex;flex-direction:column;gap:10px}
-    .panel.show{transform:none}
-    .panel h3{margin:6px 4px 4px;font-size:16px;letter-spacing:.2px}
-    .panel .row{display:flex;gap:8px;flex-wrap:wrap}
-    textarea,input,select{width:100%;background:#071a2f;border:1px solid #204a7d;color:var(--text);border-radius:12px;padding:10px;font:inherit;box-shadow:inset 0 0 10px #0008}
-    label{font-size:12px;color:var(--muted)}
-    .mini{font-size:12px;opacity:.9}
-    .toast{position:fixed;z-index:6;inset:auto 50% 18px auto;transform:translateX(-50%) translateY(20px);opacity:0;background:#072645;color:#dff;border:1px solid #2f6fb6;border-radius:14px;padding:10px 14px;box-shadow:var(--shadow);transition:all .3s;pointer-events:none}
-    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-    @media (min-width:800px){.vs{grid-template-columns:1fr 80px 1fr}}
-  </style>
+  <link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAABdYH7WAAA...AAA==" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<div id="stage">
-  <div id="grid"></div>
-  <div id="scan"></div>
-  <header>
-    <div class="title">
-      <span style="font-size:20px">🌟 Adult Star Battle — Retro 80s</span>
-      <span class="badge">PWA</span>
+  <div id="ui">
+    <div id="title">NECRO SLAYER</div>
+    <div id="hud">
+      <div class="badge"><span id="hp">100</span> HP</div>
+      <div class="badge"><span id="score">0</span> Kills</div>
+      <div class="badge"><span id="wave">1</span> Wave</div>
+      <div class="badge rage"><span id="rage">0%</span> RAGE</div>
     </div>
-    <div style="display:flex; gap:8px">
-      <button id="btnMusic" class="iconbtn" aria-pressed="false" title="Audio aktivieren / stummschalten">🎵 Musik</button>
-      <button id="btnMenu" class="iconbtn" title="Setup">☰</button>
-    </div>
-  </header>
-  <main id="arena">
-    <div class="vs">
-      <div class="card" id="cardL" data-side="L">
-        <div class="imgwrap">
-          <img id="imgL" alt="">
-          <div class="imgpager"><button id="prevL">⟨</button><button id="nextL">⟩</button></div>
-        </div>
-        <div class="name" id="nameL">–</div>
-        <div class="hint mini">Tippe, wische oder Bild wechseln ⟨ ⟩</div>
-        <div class="cta"><button class="iconbtn" id="chooseL">⬅️ Links gewinnt</button></div>
-      </div>
-      <div class="bolt">⚡</div>
-      <div class="card" id="cardR" data-side="R">
-        <div class="imgwrap">
-          <img id="imgR" alt="">
-          <div class="imgpager"><button id="prevR">⟨</button><button id="nextR">⟩</button></div>
-        </div>
-        <div class="name" id="nameR">–</div>
-        <div class="hint mini">Tippe, wische oder Bild wechseln ⟨ ⟩</div>
-        <div class="cta"><button class="iconbtn" id="chooseR">Rechts gewinnt ➡️</button></div>
+    <div id="controls">
+      <div id="stickL"><div class="nub"></div></div>
+      <div id="buttons">
+        <button id="btnSlash">Schwert</button>
+        <button id="btnShoot">Shotgun</button>
+        <button id="btnRage" class="rage">FURY</button>
       </div>
     </div>
-  </main>
-  <footer>
-    <button class="iconbtn" id="btnUndo">↩️ Undo</button>
-    <button class="iconbtn" id="btnShuffle">🔀 Mischen</button>
-    <span class="pill" id="status">0 / 0</span>
-    <button class="iconbtn" id="btnTarget">🎯 Ziel</button>
-    <button class="iconbtn" id="btnFullscreen">⛶</button>
-    <button class="iconbtn" id="btnInstall" style="display:none">⬇️ Installieren</button>
-  </footer>
-
-  <section class="panel" id="panelSetup" aria-modal="true" role="dialog">
-    <div class="row" style="justify-content:space-between;align-items:center">
-      <h3>🎮 Turnier Setup</h3>
-      <button class="iconbtn" id="btnCloseSetup">✖</button>
-    </div>
-    <label>Teilnehmer (je Zeile). Optional: „Name | BildURL1, BildURL2, …“</label>
-    <textarea id="txtNames" rows="8" placeholder="z.B.&#10;Person A&#10;Person B | https://...jpg, https://...png"></textarea>
-    <div class="row">
-      <div style="flex:1">
-        <label>Ziel-Anzahl</label>
-        <input id="inputTarget" type="number" min="1" value="1"/>
-      </div>
-      <div style="flex:1">
-        <label>Asset-Größe</label>
-        <select id="inputImgSize">
-          <option value="420" selected>420px</option>
-          <option value="640">640px</option>
-          <option value="800">800px</option>
-        </select>
+    <div id="overlay">
+      <div class="card">
+        <h1>Necro Slayer</h1>
+        <p>Tippe zum Start. Zieh den linken Stick zum Bewegen. <br>
+        <b>Schwert</b>=Nahkampf, <b>Shotgun</b>=Fernkampf. Sammle Schädel → Rage.</p>
+        <button id="startBtn">Start</button>
       </div>
     </div>
-    <div class="row">
-      <div style="flex:1">
-        <label>NSFW erlaubt?</label>
-        <select id="inputMature">
-          <option value="true" selected>Ja</option>
-          <option value="false">Nein</option>
-        </select>
-      </div>
-      <div style="flex:1">
-        <label>Max. Bilder pro Teilnehmer</label>
-        <input id="inputMaxImgs" type="number" min="1" max="12" value="6"/>
-      </div>
-    </div>
-    <div class="row">
-      <button class="iconbtn" id="btnLoadDemo">🎲 Demo laden</button>
-      <button class="iconbtn" id="btnStart">🚀 Start</button>
-    </div>
-    <label class="mini">Quellen: Wikipedia → Openverse (mehrfach) • Eigene Bildliste per „Name | URL1, URL2“</label>
-  </section>
+  </div>
+  <canvas id="game" width="1280" height="720"></canvas>
 
-  <div class="toast" id="toast"></div>
-</div>
-
-<script>
-const $ = s=>document.querySelector(s);
-const rand=(a,b)=>Math.random()*(b-a)+a;
-const clamp=(n,a,b)=>Math.max(a,Math.min(b,n));
-let contestants=[],stack=[],queue=[],targetCount=1,imgSize=420,mature=true,maxImgs=6,deferredPrompt=null,audioOn=false;
-const cardL=$("#cardL"),cardR=$("#cardR"),imgL=$("#imgL"),imgR=$("#imgR"),nameL=$("#nameL"),nameR=$("#nameR");
-const statusEl=$("#status"),toastEl=$("#toast"),prevL=$("#prevL"),nextL=$("#nextL"),prevR=$("#prevR"),nextR=$("#nextR");
-const panel=$("#panelSetup"); $("#btnMenu").onclick=()=>panel.classList.add('show'); $("#btnCloseSetup").onclick=()=>panel.classList.remove('show'); $("#btnTarget").onclick=()=>panel.classList.add('show');
-
-const DEMO=["Tracy Lords","Jenna Jameson","Seka","Nina Hartley","Ginger Lynn","Joanna Storm","Christy Canyon","Heather Hunter","Asia Carrera","Tera Patrick"];
-
-function toast(m,t=1500){toastEl.textContent=m;toastEl.classList.add('show');setTimeout(()=>toastEl.classList.remove('show'),t)}
-
-const audio={ctx:null,master:null,musicGain:null,sfxGain:null,seqI:0,playing:false,
-  ensure(){if(this.ctx)return;this.ctx=new (window.AudioContext||window.webkitAudioContext)();this.master=this.ctx.createGain();this.master.gain.value=.8;this.master.connect(this.ctx.destination);this.musicGain=this.ctx.createGain();this.musicGain.gain.value=0;this.musicGain.connect(this.master);this.sfxGain=this.ctx.createGain();this.sfxGain.gain.value=.9;this.sfxGain.connect(this.master)},
-  playMusic(){this.ensure();if(this.playing)return;this.playing=true;const c=this.ctx,g=this.musicGain;g.gain.linearRampToValueAtTime(.25,c.currentTime+.2);const bpm=112,spb=60/bpm,ch=[[0,4,7],[2,5,9],[4,7,11],[0,5,9]],base=220;const loop=()=>{if(!this.playing)return;const t0=c.currentTime,cd=ch[this.seqI%ch.length];for(let s=0;s<16;s++){const t=t0+s*spb/2,n=cd[s%3],f=base*Math.pow(2,n/12);const o=c.createOscillator();o.type='triangle';o.frequency.value=f;const gg=c.createGain();gg.gain.setValueAtTime(.0001,t);gg.gain.exponentialRampToValueAtTime(.35,t+.02);gg.gain.exponentialRampToValueAtTime(.0001,t+.23);o.connect(gg);gg.connect(g);o.start(t);o.stop(t+.25)}this.seqI++;setTimeout(loop,spb*1000*8)};loop()},
-  stopMusic(){if(!this.ctx)return;this.musicGain.gain.linearRampToValueAtTime(0,this.ctx.currentTime+.2);this.playing=false},
-  click(){this.ensure();const c=this.ctx,o=c.createOscillator();o.type='square';o.frequency.value=660;const g=c.createGain();g.gain.value=.4;g.connect(this.sfxGain);o.connect(g);o.start();o.frequency.exponentialRampToValueAtTime(180,c.currentTime+.08);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+.12);o.stop(c.currentTime+.13)},
-  win(){this.ensure();const c=this.ctx;for(let i=0;i<3;i++){const t=c.currentTime+i*.05,o=c.createOscillator();o.type='sawtooth';const g=c.createGain();g.gain.value=.25;g.connect(this.sfxGain);o.connect(g);o.frequency.setValueAtTime(440*Math.pow(2,i/12),t);o.start(t);o.stop(t+.18);g.gain.exponentialRampToValueAtTime(.0001,t+.18)}}};
-$("#btnMusic").onclick=async()=>{audio.ensure();if(!audioOn){await audio.ctx.resume();audio.playMusic();$("#btnMusic").classList.add('active');audioOn=true;toast("Musik an 🎵")}else{audio.stopMusic();$("#btnMusic").classList.remove('active');audioOn=false;toast("Musik aus 🔇")}};
-$("#btnFullscreen").onclick=()=>{const el=document.documentElement;if(!document.fullscreenElement)el.requestFullscreen?.();else document.exitFullscreen?.();};
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$("#btnInstall").style.display='inline-flex'});
-$("#btnInstall").onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();deferredPrompt=null}};
-
-function parseNames(t){return t.split(/\n|,/).map(s=>s.trim()).filter(Boolean)}
-function newQueue(list){const a=[...list];for(let i=a.length-1;i>0;i--){const j=(Math.random()*(i+1))|0;[a[i],a[j]]=[a[j],a[i]]}return a}
-function updateStatus(){statusEl.textContent=`${queue.length} übrig • Ziel ${targetCount}`}
-function pickNextPair(){if(queue.length<=1)return null;const a=queue.shift(),b=queue.shift();return [a,b]}
-function unique(arr){return [...new Set(arr.filter(Boolean))]}
-
-async function fetchImagesFor(name){
-  let manual=[];let clean=name;
-  if(name.includes("|")){const [n,urls]=(name.split("|"));clean=n.trim();manual=(urls||"").split(/,|\s+/).map(s=>s.trim()).filter(s=>/^https?:\/\//i.test(s))}
-  const imgs=[...manual];
-  try{const url=`https://de.wikipedia.org/w/api.php?action=query&format=json&origin=*&prop=pageimages&piprop=thumbnail&pithumbsize=${imgSize}&generator=search&gsrlimit=1&gsrsearch=${encodeURIComponent(clean)}`;const r=await fetch(url);const j=await r.json();const pages=j?.query?.pages;const first=pages&&Object.values(pages)[0];if(first?.thumbnail?.source)imgs.push(first.thumbnail.source)}catch(e){}
-  try{const url=`https://api.openverse.engineering/v1/images/?q=${encodeURIComponent(clean)}&page_size=30&mature=${mature?'true':'false'}`;const r=await fetch(url);const j=await r.json();const results=(j?.results||[]).map(x=>x?.thumbnail||x?.url).filter(Boolean);imgs.push(...results)}catch(e){}
-  if(imgs.length===0){const initials=clean.split(/\s+/).map(s=>s[0]).slice(0,2).join('').toUpperCase();const svg=encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='${imgSize}' height='${imgSize}'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop stop-color='#00f0ff'/><stop offset='1' stop-color='#ff00f0'/></linearGradient></defs><rect width='100%' height='100%' fill='#041222'/><circle cx='50%' cy='50%' r='45%' fill='url(#g)' opacity='.22'/><text x='50%' y='58%' font-family='Helvetica,Arial' font-size='${imgSize*0.35}' fill='#e6f7ff' text-anchor='middle' font-weight='900' letter-spacing='2'>${initials}</text></svg>`);imgs.push(`data:image/svg+xml;charset=utf-8,${svg}`)}
-  const uniq=unique(imgs).slice(0, maxImgs); return {name:clean, imgs:uniq, ix:Math.floor(Math.random()*uniq.length)};
-}
-
-async function ensureContestants(rawNames){const names=rawNames;contestants=[];for(const nm of names){contestants.push(await fetchImagesFor(nm))}}
-
-function applyCard(side, person){
-  const imgEl=side==='L'?imgL:imgR; const nameEl=side==='L'?nameL:nameR;
-  nameEl.textContent=person.name;
-  const src=person.imgs[((person.ix%person.imgs.length)+person.imgs.length)%person.imgs.length];
-  imgEl.src=src;
-  const card=side==='L'?cardL:cardR; card.style.transform='translateY(10px) scale(.98)'; card.style.opacity='0.7';
-  requestAnimationFrame(()=>{requestAnimationFrame(()=>{card.style.transition='transform .35s cubic-bezier(.22,.61,.36,1), opacity .35s';card.style.transform='translateY(0) scale(1)';card.style.opacity='1';setTimeout(()=>{card.style.transition=''},400);})});
-}
-function showPair(pair){ if(!pair){ if(queue.length<=targetCount){ toast(`🎉 Ziel erreicht: ${queue.length} Finalist(en)!`); confettiBurst(centerX(), centerY(), 200);} return; } const [A,B]=pair; cardL.classList.remove('win'); cardR.classList.remove('win'); applyCard('L',A); applyCard('R',B); }
-function pushWinner(winner,loser){queue.push(winner);updateStatus()}
-let currentPair=null;
-function choose(side){ if(!currentPair)return; audio.click(); const [A,B]=currentPair; const winner=side==='L'?A:B; const loser=side==='L'?B:A; (side==='L'?cardL:cardR).classList.add('win'); audio.win(); confettiBurst(centerX(side==='L'?cardL:cardR), centerY(side==='L'?cardL:cardR), 120); stack.push({left:A,right:B,winner}); pushWinner(winner,loser); if(queue.length>targetCount){ currentPair=pickNextPair(); showPair(currentPair);} else{ currentPair=null; toast("🏁 Turnier abgeschlossen"); } }
-$("#chooseL").onclick=()=>choose('L'); $("#chooseR").onclick=()=>choose('R');
-
-$("#btnUndo").onclick=()=>{const last=stack.pop();if(!last)return toast("Nichts zum Rückgängig machen");queue.unshift(last.winner,last.left===last.winner?last.right:last.left);updateStatus();currentPair=pickNextPair();showPair(currentPair)};
-$("#btnShuffle").onclick=()=>{if(!contestants.length)return;queue=newQueue(contestants);stack.length=0;updateStatus();currentPair=pickNextPair();showPair(currentPair);toast("🔀 Neu gemischt")};
-
-function cycle(side,dir){ if(!currentPair)return; const person=side==='L'?currentPair[0]:currentPair[1]; person.ix+=dir; applyCard(side,person); }
-$("#prevL").onclick=()=>cycle('L',-1); $("#nextL").onclick=()=>cycle('L',+1); $("#prevR").onclick=()=>cycle('R',-1); $("#nextR").onclick=()=>cycle('R',+1);
-
-function attachSwipe(el,onLeft,onRight){let sx=0,sy=0,tr=false;el.addEventListener('touchstart',e=>{const t=e.touches[0];sx=t.clientX;sy=t.clientY;tr=true},{passive:true});el.addEventListener('touchend',e=>{if(!tr)return;tr=false;const t=e.changedTouches[0];const dx=t.clientX-sx,dy=t.clientY-sy;if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)){dx<0?onLeft():onRight()}},{passive:true})}
-attachSwipe(document.body,()=>choose('L'),()=>choose('R'));
-window.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')choose('L');if(e.key==='ArrowRight')choose('R');if(e.key.toLowerCase()==='u')$("#btnUndo").click()});
-
-const particles=[]; function confettiBurst(x,y,n=100){for(let i=0;i<n;i++){particles.push({x,y,vx:rand(-4,4),vy:rand(-8,-2),g:rand(.18,.38),life:rand(600,1200),t:performance.now(),size:rand(3,6),hue:Math.random()*360})}}
-const canvas=document.createElement('canvas'); canvas.style.position='fixed'; canvas.style.inset='0'; canvas.style.zIndex='1'; canvas.style.pointerEvents='none'; document.body.appendChild(canvas);
-const ctx=canvas.getContext('2d'); function resize(){canvas.width=innerWidth*devicePixelRatio;canvas.height=innerHeight*devicePixelRatio} addEventListener('resize',resize); resize();
-function centerX(el=document.body){const r=el.getBoundingClientRect();return r.left+r.width/2} function centerY(el=document.body){const r=el.getBoundingClientRect();return r.top+r.height/2}
-function tick(){ctx.clearRect(0,0,canvas.width,canvas.height);const now=performance.now();for(let i=particles.length-1;i>=0;i--){const p=particles[i];const dt=Math.min(32,now-p.t);p.t=now;p.vy+=p.g;p.x+=p.vx*devicePixelRatio;p.y+=p.vy*devicePixelRatio;p.life-=dt;ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.vx*.05);ctx.fillStyle=`hsl(${p.hue}, 90%, 60%)`;ctx.globalAlpha=clamp(p.life/1200,0,1);ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size*1.6);ctx.restore();if(p.life<=0||p.y>canvas.height+50)particles.splice(i,1)}requestAnimationFrame(tick)} tick();
-
-$("#btnLoadDemo").onclick=()=>{$("#txtNames").value=DEMO.join("\n")};
-$("#btnStart").onclick=async()=>{const names=parseNames($("#txtNames").value);if(names.length<2){toast("Mind. 2 Teilnehmer eingeben");return}targetCount=Math.max(1,parseInt($("#inputTarget").value||"1",10));imgSize=parseInt($("#inputImgSize").value,10)||420;mature=($("#inputMature").value==="true");maxImgs=clamp(parseInt($("#inputMaxImgs").value||"6",10),1,12);toast("Lade Bilder …");await ensureContestants(names);queue=newQueue(contestants);stack.length=0;updateStatus();currentPair=pickNextPair();showPair(currentPair);panel.classList.remove('show')};
-
-if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'))}
-</script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js');
+    }
+  </script>
+  <script src="app.js"></script>
 </body>
 </html>
