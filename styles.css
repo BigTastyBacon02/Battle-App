@@ -1,5 +1,5 @@
-html,body{margin:0;height:100%;background:#0b0b0b;color:#eee;font-family:system-ui,Segoe UI,Roboto,Arial}
-#game{position:fixed;inset:0;touch-action:none;background:#000}
+html,body{margin:0;height:100%;background:#0b0b0b;color:#eee;font-family:system-ui,Segoe UI,Roboto,Arial;overflow:hidden}
+#game{position:fixed;inset:0;touch-action:none;width:100vw;height:100vh;display:block;background:#000}
 #ui{position:fixed;inset:0;pointer-events:none}
 #title{position:fixed;top:8px;left:12px;font-weight:900;letter-spacing:2px;color:#f44;text-shadow:0 0 16px #f00,0 0 4px #400;font-size:14px}
 #hud{position:fixed;top:8px;right:8px;display:flex;gap:8px;flex-wrap:wrap}
@@ -9,12 +9,10 @@ html,body{margin:0;height:100%;background:#0b0b0b;color:#eee;font-family:system-
 #stickL{pointer-events:auto;width:140px;height:140px;border:2px solid #333;border-radius:50%;background:rgba(30,30,30,.5);position:relative}
 #stickL .nub{position:absolute;left:50%;top:50%;width:64px;height:64px;border-radius:50%;transform:translate(-50%,-50%);background:#222;border:2px solid #555}
 #buttons{pointer-events:auto;display:flex;gap:10px}
-#buttons button{background:#1a1a1a;border:1px solid #444;color:#eee;padding:12px 14px;border-radius:8px;font-weight:800}
+#buttons button{background:#1a1a1a;border:1px solid #444;color:#eee;padding:12px 14px;border-radius:8px;font-weight:800;-webkit-appearance:none;appearance:none}
 #buttons button:active{transform:scale(.98)}
 #buttons .rage{border-color:#a00;color:#f55;box-shadow:0 0 10px #a00 inset}
 #overlay{position:fixed;inset:0;background:linear-gradient(180deg,#0008,#000e);display:grid;place-items:center}
-#overlay .card{background:#121212;border:1px solid #333;border-radius:12px;padding:18px;max-width:520px;text-align:center;box-shadow:0 0 40px #300}
+#overlay .card{background:#121212;border:1px solid #333;border-radius:12px;padding:18px;max-width:520px;width:86vw;text-align:center;box-shadow:0 0 40px #300}
 #overlay button,#startBtn{pointer-events:auto;margin-top:10px;background:#f33;border:none;color:#111;padding:12px 18px;border-radius:10px;font-weight:900;letter-spacing:1px}
-@media (min-aspect-ratio: 2/3){
-  #controls{bottom:30px}
-}
+@media (min-aspect-ratio: 2/3){ #controls{bottom:30px} }
