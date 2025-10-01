@@ -7,12 +7,12 @@
   "theme_color": "#0b0b0b",
   "icons": [
     {
-      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAABhYj8XAAA...AAA==",
+      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAABhYj8XAAAAA3NCSVQICAjb4U/gAAAAtElEQVR4nO3XsQkCQRBF0fdnXxqW0y3C8d4a8cYJc7K3Vb3gL7Q1xgAAAAAAAAAkF+u1kB0+Xr0q3dQ3U0nmo8r1Q1N2w2o5m2r3o3gpx6z9gV2j3mQx8gP2m7bWz8lq8J6n3Q3rG7bq1mQ1b6z2g3bT2mU9wq9cF5C6z2w3rH6Yw1c/3hYwV9r2gAAAAAAAAAAJwJ9rQn6c7o1xwAAAABJRU5ErkJggg==",
       "sizes": "72x72",
       "type": "image/png"
     },
     {
-      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIwAAACMCAYAAABo7o6gAAA...AAA==",
+      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIwAAACMCAYAAABo7o6gAAAAA3NCSVQICAjb4U/gAAABMUlEQVR4nO3bQQ3CMBRE0Z8d3aY3kQyqz1dKxQb4G3v2i0a7F4qF+8o0AAAAAAAAAAJ6k3x3q4m3w6U9W2mJ5fVZtqfVqH2xG0gx1qFq2k4d0G3ezw3n7Q9bq3q2nXwzT8b0EwX6ZkE9bJg2L2Wl2X5S7Cz3o8a1A2bGv2m5iJ4m5oX1m8r2Qm5JY7c7l7pVgAAAAAAAAAAwI1S7lVnY0l7M1Y0b4H0mLZ2b3O9x2j1Qz7rQwQqz3lM3zv4w4mWAAAAAAAAAAC8C9yVx3w3+oH3nCwAAAAASUVORK5CYII=",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
